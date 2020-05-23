@@ -1,0 +1,51 @@
+.navbar-brand {
+    vertical-align: bottom;
+}
+
+.navbar img {
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+.rightMenu {
+    display: flex;
+}
+
+.d-flex, .navbar .collapse .iconBtn {
+    margin-right: 10px;
+}
+
+.navbar .collapse .iconBtn span {
+    padding-left: 5px;
+}
+
+.d-flex .btn-group .userbtn {
+    padding-right: 2px;
+    padding-left: 20px;
+}
+
+.d-flex .btn-group span {
+    padding-right: 10px;
+}
+
+.dropdown-menu {
+    min-width: 17rem;
+}
+
+.dropdown-loggedin {
+    min-width: 10rem;
+}
+
+.carousel-item {
+    height: 65vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.page-footer .container-fluid .row .column {
+    text-align: left;
+}
