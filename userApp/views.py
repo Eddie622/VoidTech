@@ -34,6 +34,7 @@ def login(request):
     if request.method == "GET":
         return redirect("/")
     
+    print(request.POST)
     # find user in database
     user = User.objects.filter(email=request.POST['email'])
     # if user exists
@@ -44,6 +45,12 @@ def login(request):
             # place user in session
             request.session['userid'] = logged_user.id
             request.session['fname'] = logged_user.first_name
+            # if remember me activated, save email, else delete session data for email
+            if 'remember' in request.POST:
+                request.session['email'] = logged_user.email
+            else:
+                if 'email' in request.session:
+                    del request.session['email']
             return redirect("/")
     
     # user does not exist

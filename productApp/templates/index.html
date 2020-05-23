@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 
 <body>
@@ -72,31 +74,32 @@
                             data-reference="parent">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                            <!-- <a class="dropdown-item" href="#">Login</a>
-                            <a class="dropdown-item" href="#">Register</a>
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a> -->
+                        <div class="dropdown-menu dropdown-signin" aria-labelledby="dropdownMenuReference">
                             <form class="px-4 py-3" action="../../user/login/" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1">Email address</label>
-                                    <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1"
-                                        placeholder="email@example.com">
+                                    {% if 'email' in request.session %}
+                                    <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" value="{{request.session.email}}">
+                                    {% else %}
+                                    <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleDropdownFormPassword1">Password</label>
-                                    <input name="pwd" type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                        placeholder="Password">
+                                    <input name="pwd" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                        {% if 'email' in request.session %}
+                                        <input name="remember" type="checkbox" class="form-check-input" id="dropdownCheck" checked>
+                                        {% else %}
+                                        <input name="remember" type="checkbox" class="form-check-input" id="dropdownCheck">
+                                        {% endif%}
                                         <label class="form-check-label" for="dropdownCheck">Remember me</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button type="submit" class="btn btn-primary w-100">Sign in</button>
                             </form>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../../user/register">New around here? Sign up</a>
@@ -270,17 +273,17 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="#!" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#!">1</a></li>
+            <li class="page-item"><a class="page-link" href="#!">2</a></li>
+            <li class="page-item"><a class="page-link" href="#!">3</a></li>
+            <li class="page-item"><a class="page-link" href="#!">4</a></li>
+            <li class="page-item"><a class="page-link" href="#!">5</a></li>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="#!" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
