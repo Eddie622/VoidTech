@@ -34,7 +34,6 @@ def login(request):
     if request.method == "GET":
         return redirect("/")
     
-    print(request.POST)
     # find user in database
     user = User.objects.filter(email=request.POST['email'])
     # if user exists

@@ -16,8 +16,39 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from userApp.models import User as Shopper
+from productApp.models import Brand, OS, Processor, Memory, Graphics_card, Storage, Category, Product
+
+class ShopperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Shopper, ShopperAdmin)
+class BrandAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Brand, BrandAdmin)
+class OSAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(OS, OSAdmin)
+class ProcessorAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Processor, ProcessorAdmin) 
+class MemoryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Memory, MemoryAdmin)
+class Graphics_cardAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Graphics_card, Graphics_cardAdmin)
+class StorageAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Storage, StorageAdmin)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Category, CategoryAdmin)
+class ProductAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Product, ProductAdmin)
+
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('productApp.urls')),
     path('user/', include('userApp.urls'))
 ]

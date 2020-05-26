@@ -25,36 +25,57 @@ class Brand(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
+
+class OS(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Processor(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Memory(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Graphics_card(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Storage(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __repr__(self):
+        return f"<Brand object: ({self.id}) [{self.name}]>"
 
 class Product(models.Model):
     name = models.CharField(max_length=45)
+    price = models.DecimalField(max_digits=10,decimal_places=2)
     desc = models.TextField(blank=True, null=True)
     brand = models.ForeignKey(Brand, related_name="products", on_delete = models.CASCADE)
+    os = models.ForeignKey(OS, related_name="products", on_delete = models.CASCADE)
     processor = models.ForeignKey(Processor, related_name="products", on_delete = models.CASCADE)
     memory = models.ForeignKey(Memory, related_name="products", on_delete = models.CASCADE)
     graphics_card = models.ForeignKey(Graphics_card, related_name="products", on_delete = models.CASCADE, blank=True, null=True)
@@ -63,6 +84,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = productManager()
+    def __repr__(self):
+        return f"<Product object: ({self.id}) ({self.price}) [{self.name}]>"
 
 # class Accessory(models.Model):
 #     name = models.CharField(max_length=45)
