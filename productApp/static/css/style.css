@@ -35,10 +35,6 @@
     background-color: transparent; 
 }
 
-/* border: 2px solid green;
-color: green;
-background-color: transparent; */
-
 /* Media Queries */
 
 @media (min-width: 768px) {
@@ -54,6 +50,14 @@ background-color: transparent; */
 }
 
 /* Normal Display */
+
+html {
+    scroll-behavior: smooth;
+}
+
+.no-click {
+    pointer-events: none;
+}
 
 .navbar img {
     border-radius: 20px;

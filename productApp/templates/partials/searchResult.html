@@ -1,0 +1,29 @@
+{% load static %}
+{% for product in products %}
+<div class="col-md-4">
+    <div class="productDisplay product-outline col-md-12">
+        <h5 class="w-75">{{product.name}}</h5>
+        <h6>${{product.price}}</h6>
+        {% if product.category.id == 1 %}
+        <img class="productimg" src="{% static 'img/pc.jpg' %}" alt="">
+        {% elif product.category.id == 2%}
+        <img class="productimg" src="{% static 'img/laptop.jpg' %}" alt="">
+        {% elif product.category.id == 3%}
+        <img class="productimg" src="{% static 'img/tablet.jpg' %}" alt="">
+        {% elif product.category.id == 4%}
+        <img class="productimg" src="{% static 'img/galaxy.jpg' %}" alt="">
+        {% else %}
+        <img class="productimg" src="{% static 'img/noImg.png' %}" alt="">
+        {% endif %}
+        <p>{{product.desc}}</p>
+        <div class="options">
+            <button type="button" class="iconBtn btn light-green-outline text-light light-black"><i
+                    data-feather="eye"></i><span>Details</span></button>
+            <button type="button" class="iconBtn btn light-green-outline text-light light-black"><i
+                    data-feather="shopping-cart"></i><span>Add to Cart</span></button>
+        </div>
+        <button type="button" class="displayWish iconBtn btn light-green-outline text-light light-black"><i
+                data-feather="heart"></i></button>
+    </div>
+</div>
+{% endfor %}
