@@ -1,5 +1,5 @@
 from django.db import models
-from userApp.models import User
+from userApp.models import User, Wishlist
 
 class productManager(models.Manager):
     def basic_validator(self, postData):

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from userApp.models import User as Shopper
+from userApp.models import User as Shopper, Wishlist
 from productApp.models import Brand, OS, Processor, Memory, Graphics_card, Storage, Category, Product
 
 class ShopperAdmin(admin.ModelAdmin):
@@ -46,6 +46,9 @@ admin.site.register(Category, CategoryAdmin)
 class ProductAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Product, ProductAdmin)
+class WishlistAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Wishlist, WishlistAdmin)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

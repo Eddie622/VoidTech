@@ -26,7 +26,9 @@ def createUser(request):
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
         # create user
-        User.objects.create(first_name=request.POST['fname'],last_name=request.POST['lname'],email=request.POST['email'],password=pw_hash)
+        new_user = User.objects.create(first_name=request.POST['fname'],last_name=request.POST['lname'],email=request.POST['email'],password=pw_hash)
+        # create wishlist
+        Wishlist.objects.create(user = new_user)
         return redirect("/")
 
 # login route
