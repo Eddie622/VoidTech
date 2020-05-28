@@ -38,3 +38,9 @@ class Wishlist(models.Model):
     products = models.ManyToManyField('productApp.Product', related_name="wishlists")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    products = models.ManyToManyField('productApp.Product', related_name="carts")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
