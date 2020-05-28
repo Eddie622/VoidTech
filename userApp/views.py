@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 
 from .models import *
@@ -56,10 +56,17 @@ def login(request):
     messages.error(request,'invalid email/password')
     return redirect("/")
 
-#logout route
+# logout route
 def logout(request):
     # if user is logged in, clear user specific session variables
     if 'userid' in request.session:
         del request.session['userid']
         del request.session['fname']
     return redirect('/')
+
+# user profile route
+def profile(request, userid):
+    return HttpResponse(f"Hello user ID:{userid} This is your profile page. This page is under construction")
+# user wishlist route
+def wishlist(request, userid):
+    return HttpResponse(f"Hello user ID:{userid} This is your wishlist page. This page is under construction")

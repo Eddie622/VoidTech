@@ -51,15 +51,15 @@
                 {% if 'fname' in request.session %}
                 <div class="d-flex">
                     <div class="btn-group">
-                        <button type="button" class="userbtn btn light-green-outline"><span>Hello
+                        <button type="button" class="userbtn btn light-green-outline text-light"><span>Hello
                                 {{ request.session.fname }}</span><i data-feather="user"></i></button>
-                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split"
+                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split light-green-outline text-light"
                             id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             data-reference="parent">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-loggedin" aria-labelledby="dropdownMenuReference">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="../../user/{{user.id}}">Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../../user/logout">Logout</a>
                         </div>
@@ -115,10 +115,10 @@
                     </div>
                 </div>
                 {% endif %}
-                <button type="button" class="iconBtn btn light-green-outline text-light"><i
-                        data-feather="heart"></i></button>
-                <button type="button" class="iconBtn btn light-green-outline text-light"><i
-                        data-feather="shopping-cart"></i><span>0</span></button>
+                <a href="../../user/{{user.id}}/wishlist"><button type="button" class="iconBtn btn light-green-outline text-light"><i
+                        data-feather="heart"></i></button></a>
+                <a href="checkout/"><button type="button" class="iconBtn btn light-green-outline text-light"><i
+                        data-feather="shopping-cart"></i><span>0</span></button></a>
             </div>
         </div>
     </nav>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 import re
 
 from .models import *
@@ -9,10 +9,9 @@ def index(request):
         'products' : Product.objects.all()
     }
 
-    # TODO: set up html based on user object
     # place user (if any)
-    # if 'userid' in request.session:
-    #     context['user'] = User.objects.get(id=request.session['userid'])
+    if 'userid' in request.session:
+        context['user'] = User.objects.get(id=request.session['userid'])
 
     # delete any category saved (resets search results)
     if 'category' in request.session:
@@ -41,3 +40,6 @@ def search(request):
     
     # serve up search results
     return render(request, 'partials/searchResult.html', context)
+
+def checkout(request):
+    return HttpResponse("This is the checkout page. This page is currently under construction")
