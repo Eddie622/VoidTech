@@ -1,4 +1,5 @@
 {% load static %}
+{% if products %}
 {% for product in products %}
 <div class="col-md-4">
     <div class="productDisplay product-outline col-md-12">
@@ -27,3 +28,6 @@
     </div>
 </div>
 {% endfor %}
+{% else %}
+<h1 style="color: white;">Sorry! No results found</h1>
+{% endif %}

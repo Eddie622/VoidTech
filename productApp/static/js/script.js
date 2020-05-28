@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    // place feather icons
-    feather.replace();
+    // Get initial product content
+    $.get("search/", function(serverResponse) {
+        $("#productResults").html(serverResponse);
+        feather.replace(); // initial placement of feather icons
+    });
 
     // Stop dropdown from closing on click within container
     $('.dropdown-menu').click(function (e) {
@@ -12,7 +15,7 @@ $(document).ready(function () {
         var value = $(this).text()
         var csrftoken = Cookies.get('csrftoken');
 
-        // align value to category ID of Category model
+        // align text value to category ID of Category model
         switch (value) {
             case 'Desktops':
               value = 1;
@@ -30,6 +33,7 @@ $(document).ready(function () {
               value = 5;
         }
 
+        // setup data to post
         data = {
             'csrfmiddlewaretoken' : csrftoken,
             'category' : value
