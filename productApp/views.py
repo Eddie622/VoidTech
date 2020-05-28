@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, HttpResponse
 import re
 
 from .models import *
-from userApp.models import User
 
 def index(request):
     context = {

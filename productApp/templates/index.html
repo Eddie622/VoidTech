@@ -53,7 +53,8 @@
                     <div class="btn-group">
                         <button type="button" class="userbtn btn light-green-outline text-light"><span>Hello
                                 {{ request.session.fname }}</span><i data-feather="user"></i></button>
-                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split light-green-outline text-light"
+                        <button type="button"
+                            class="btn dropdown-toggle dropdown-toggle-split light-green-outline text-light"
                             id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             data-reference="parent">
                             <span class="sr-only">Toggle Dropdown</span>
@@ -115,10 +116,10 @@
                     </div>
                 </div>
                 {% endif %}
-                <a href="../../user/{{user.id}}/wishlist"><button type="button" class="iconBtn btn light-green-outline text-light"><i
-                        data-feather="heart"></i></button></a>
+                <a href="../../user/{{user.id}}/wishlist"><button type="button"
+                        class="iconBtn btn light-green-outline text-light"><i data-feather="heart"></i></button></a>
                 <a href="checkout/"><button type="button" class="iconBtn btn light-green-outline text-light"><i
-                        data-feather="shopping-cart"></i><span>0</span></button></a>
+                            data-feather="shopping-cart"></i><span>0</span></button></a>
             </div>
         </div>
     </nav>
@@ -182,6 +183,24 @@
     <!-- Content Container (Search Results Load Into Here) -->
     <div class="container-fluid">
         <div class="dark-black row justify-content-center" id="productResults"></div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">Description:</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!--End Content-->
 
