@@ -53,7 +53,7 @@
                 <div class="d-flex">
                     <div class="btn-group">
                         <button type="button" class="userbtn btn light-green-outline text-light"><span>Hello
-                                {{ request.session.fname }}</span><i data-feather="user"></i></button>
+                                {{ user.first_name }}</span><i data-feather="user"></i></button>
                         <button type="button"
                             class="btn dropdown-toggle dropdown-toggle-split light-green-outline text-light"
                             id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -113,7 +113,8 @@
                             <div class="dropdown-divider"></div>
                             <form class="px-4 py-3" action="../../user/sampleLogin/" method="post">
                                 {% csrf_token %}
-                                <a href="../../user/sampleLogin/"><button type="submit" class="btn btn-success w-100">Use Sample Login</button></a>
+                                <a href="../../user/sampleLogin/"><button type="submit"
+                                        class="btn btn-success w-100">Use Sample Login</button></a>
                             </form>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-center" href="../../user/register">New around here? Sign up</a>
@@ -122,8 +123,20 @@
                     </div>
                 </div>
                 {% endif %}
+                {% if 'userid' in request.session %}
                 <a href="../../user/{{user.id}}/wishlist"><button type="button"
-                        class="iconBtn btn light-green-outline text-light"><i data-feather="heart"></i></button></a>
+                        class="view-wishlist-btn iconBtn btn light-green-outline text-light"><i
+                            data-feather="heart"></i></button></a>
+                {% else %}
+                <button type="button" class="view-wishlist-btn iconBtn btn light-green-outline text-light"><i
+                        data-feather="heart"></i></button>
+                <div class="view-wishlist-alert alert alert-warning alert-dismissible" role="alert">
+                    Please Sign-in to Use Wishlist Feature!
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
                 <a href="checkout/"><button type="button" class="iconBtn btn light-green-outline text-light"><i
                             data-feather="shopping-cart"></i><span>0</span></button></a>
             </div>
@@ -188,7 +201,9 @@
 
     <!-- Content Container -->
     <div class="container-fluid">
-        <div class="dark-black row justify-content-center" id="productResults"><!-- Load Search Results Here --></div>
+        <div class="dark-black row justify-content-center" id="productResults">
+            <!-- Load Search Results Here -->
+        </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

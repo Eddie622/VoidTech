@@ -1,3 +1,5 @@
+// TODO: Use specs instead of description in modal
+
 $(document).ready(function () {
     // feather icon placement
     feather.replace();

@@ -26,12 +26,28 @@
                     data-feather="shopping-cart"></i><span>Add to Cart</span></button>
         </div>
         {% if 'userid' in request.session %}
-        <a href="user/{{request.session.userid}}/wishlist/addProduct/{{product.id}}"><button type="button"
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="productid" name="productid" value="{{product.id}}">
+            <button type="submit" id="add-to-wishlist"
                 class="displayWish iconBtn btn light-green-outline text-light light-black"><i
-                    data-feather="heart"></i></button></a>
+                    data-feather="heart"></i></button>
+        </form>
+        <div class="add-to-wishlist-alert alert alert-warning alert-dismissible fade show" role="alert">
+            Added Product to Wishlist!
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% else %}
         <button type="button" class="displayWish iconBtn btn light-green-outline text-light light-black"><i
                 data-feather="heart"></i></button>
+        <div class="add-to-wishlist-alert alert alert-warning alert-dismissible fade show" role="alert">
+            Please Sign-in to Use Wishlist Feature!
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endif %}
     </div>
 </div>

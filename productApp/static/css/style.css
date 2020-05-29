@@ -47,6 +47,9 @@
     .carousel-item {
         height: 65vh!important;
     }
+    .view-wishlist-alert {
+        right: 100px;
+    }
 }
 
 /* Normal Display */
@@ -139,6 +142,21 @@ html {
     position: absolute;
     top: 15px;
     right: 15px;
+}
+
+.view-wishlist-alert {
+    position: absolute; 
+    bottom: -75px;
+    font-weight: bold;
+    display: none;
+}
+
+.add-to-wishlist-alert {
+    position: absolute; 
+    top: 60px; 
+    left:15px;
+    right: 15px;
+    font-weight: bold;
 }
 
 .pagination {

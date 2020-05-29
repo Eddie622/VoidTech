@@ -1,17 +1,30 @@
+// Reload feather icons, hide generated alerts
+function reload(){
+    feather.replace();
+    $('.add-to-wishlist-alert').hide();
+}
+
 $(document).ready(function () {
     // Get initial product content
     $.get("search/", function (serverResponse) {
         $("#productResults").html(serverResponse);
-        feather.replace(); // re-load feather icons
+        reload()
     });
 
     // Stop dropdown from closing on click within container
-    $('.dropdown-menu').click(function (event) {
-        event.stopPropagation();
+    $('.dropdown-menu').click(function (e) {
+        e.stopPropagation();
+    });
+
+    // Show alert when view wishlist button is pressed
+    // (only applies when no user is logged in) SEE: index.html line-126
+    $('.view-wishlist-btn').click(function () {
+        console.log('hello');
+        $('.view-wishlist-alert').show();
     });
 
     // category functionality (csrf_token needed due to post without form)
-    $('.category').click(function (e) {
+    $('.category').click(function () {
         var value = $(this).text()
         var csrftoken = Cookies.get('csrftoken');
 
@@ -41,7 +54,7 @@ $(document).ready(function () {
 
         $.post("search/", data, function (serverResponse) {
             $('#productResults').html(serverResponse);
-            feather.replace(); // re-load icons
+            reload();
         }
         )
     });
@@ -53,8 +66,18 @@ $(document).ready(function () {
 
         $.post("search/", data, function (serverResponse) {
             $('#productResults').html(serverResponse);
-            feather.replace(); // re-load icons
+            reload();
         }
         )
     })
+});
+
+// Open alert when wish icon within product is clicked
+$(document).on('click', '.displayWish', function(){
+    $(this).next().show();
+});
+
+// Close alert when wish icon within product is clicked
+$(document).on('click', '.close', function(){
+    $(this).parent().hide();
 });

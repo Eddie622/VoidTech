@@ -9,6 +9,13 @@ from .models import *
 from productApp.models import Product
 import bcrypt
 
+# Verify user is same as session
+def userVerified(request, userid):
+    if 'userid' not in request.session or userid != str(request.session['userid']):
+        return False
+    else:
+        return True
+
 # registration page
 def register(request):
     return render(request, 'register.html')
@@ -52,7 +59,6 @@ def login(request):
         if bcrypt.checkpw(request.POST['pwd'].encode(), logged_user.password.encode()):
             # place user in session
             request.session['userid'] = logged_user.id
-            request.session['fname'] = logged_user.first_name
             # if remember me activated, save email, else delete session data for email
             if 'remember' in request.POST:
                 request.session['email'] = logged_user.email
@@ -93,15 +99,15 @@ def logout(request):
 
 # user profile route
 def profile(request, userid):
-    if 'userid' not in request.session:
-        return redirect("/")
+    if not userVerified(request, userid):
+        return redirect('/')
 
     return render(request, "profile.html")
 
 # user wishlist route
 def wishlist(request, userid):
-    if 'userid' not in request.session:
-        return redirect("/")
+    if not userVerified(request, userid):
+        return redirect('/')
     
     context = {
         'user' : User.objects.get(id=userid)
@@ -111,8 +117,8 @@ def wishlist(request, userid):
 
 # remove product from wishlist route
 def remove_from_wishlist(request, userid, productid):
-    if 'userid' not in request.session:
-        return redirect("/")
+    if not userVerified(request, userid):
+        return redirect('/')
     
     # get the user's wishlist
     user_wishlist = Wishlist.objects.get(user_id=userid)
@@ -123,8 +129,8 @@ def remove_from_wishlist(request, userid, productid):
 
 # add product to wishlist route
 def add_to_wishlist(request, userid, productid):
-    if 'userid' not in request.session:
-        return redirect("/")
+    if not userVerified(request, userid):
+        return redirect('/')
     
     # get the user's wishlist
     user_wishlist = Wishlist.objects.get(user_id=userid)
