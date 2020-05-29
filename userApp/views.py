@@ -1,6 +1,6 @@
-# TODO: On registration route, use ajax to 
-# show error messages when back-end validation fails, also alert user on
-# succesful account creation
+# TODO: On registration page,
+# show error messages when back-end validation fails (use bootstrap validation), 
+# also alert user on succesful account creation
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -9,7 +9,7 @@ from .models import *
 from productApp.models import Product
 import bcrypt
 
-# Verify user is same as session
+# verify user is same as session
 def userVerified(request, userid):
     if 'userid' not in request.session or userid != str(request.session['userid']):
         return False
@@ -82,7 +82,9 @@ def sampleLogin(request):
         if bcrypt.checkpw('samplePass'.encode(), logged_user.password.encode()):
             # place user in session
             request.session['userid'] = logged_user.id
-            request.session['fname'] = logged_user.first_name
+            # delete session data for email
+            if 'email' in request.session:
+                del request.session['email']
             return redirect("/")
     
     # user does not exist
@@ -94,15 +96,18 @@ def logout(request):
     # if user is logged in, clear user specific session variables
     if 'userid' in request.session:
         del request.session['userid']
-        del request.session['fname']
     return redirect('/')
 
 # user profile route
 def profile(request, userid):
     if not userVerified(request, userid):
         return redirect('/')
+    
+    context = {
+        'user' : User.objects.get(id=userid)
+    }
 
-    return render(request, "profile.html")
+    return render(request, "profile.html", context)
 
 # user wishlist route
 def wishlist(request, userid):

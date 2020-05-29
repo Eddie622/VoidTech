@@ -16,10 +16,10 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-    // Show alert when view wishlist button is pressed
+    // Show alert when view wishlist button is pressed (close all others)
     // (only applies when no user is logged in) SEE: index.html line-126
     $('.view-wishlist-btn').click(function () {
-        console.log('hello');
+        $('.alert').hide();
         $('.view-wishlist-alert').show();
     });
 
@@ -72,8 +72,9 @@ $(document).ready(function () {
     })
 });
 
-// Open alert when wish icon within product is clicked
+// Open alert when wish icon within product is clicked (close all others)
 $(document).on('click', '.displayWish', function(){
+    $('.alert').hide();
     $(this).next().show();
 });
 
