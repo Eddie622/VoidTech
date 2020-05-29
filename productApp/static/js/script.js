@@ -2,27 +2,13 @@ $(document).ready(function () {
     // Get initial product content
     $.get("search/", function (serverResponse) {
         $("#productResults").html(serverResponse);
-        feather.replace(); // initial placement of feather icons
+        feather.replace(); // re-load feather icons
     });
 
     // Stop dropdown from closing on click within container
     $('.dropdown-menu').click(function (event) {
         event.stopPropagation();
     });
-
-    // Modal functionality
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-
-        // Extract Data
-        var name = button.data('title')
-        var desc = button.data('desc')
-
-        // Set-up Modal
-        var modal = $(this)
-        modal.find('.modal-title').text(name)
-        modal.find('.modal-body').text(desc)
-    })
 
     // category functionality (csrf_token needed due to post without form)
     $('.category').click(function (e) {

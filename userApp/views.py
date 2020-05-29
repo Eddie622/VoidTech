@@ -1,7 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse
+# TODO: On registration route, use ajax to 
+# show error messages when back-end validation fails, also alert user on
+# succesful account creation
+
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import *
+from productApp.models import Product
 import bcrypt
 
 # registration page
@@ -60,6 +65,24 @@ def login(request):
     messages.error(request,'invalid email/password')
     return redirect("/")
 
+# sample login route
+def sampleLogin(request):
+    # find user in database
+    user = User.objects.filter(email='sample@email.com')
+    # if user exists
+    if user:
+        logged_user = user[0]
+        # verify password
+        if bcrypt.checkpw('samplePass'.encode(), logged_user.password.encode()):
+            # place user in session
+            request.session['userid'] = logged_user.id
+            request.session['fname'] = logged_user.first_name
+            return redirect("/")
+    
+    # user does not exist
+    messages.error(request,'invalid email/password')
+    return redirect("/")
+
 # logout route
 def logout(request):
     # if user is logged in, clear user specific session variables
@@ -70,7 +93,42 @@ def logout(request):
 
 # user profile route
 def profile(request, userid):
-    return HttpResponse(f"Hello user ID:{userid} This is your profile page. This page is under construction")
+    if 'userid' not in request.session:
+        return redirect("/")
+
+    return render(request, "profile.html")
+
 # user wishlist route
 def wishlist(request, userid):
-    return HttpResponse(f"Hello user ID:{userid} This is your wishlist page. This page is under construction")
+    if 'userid' not in request.session:
+        return redirect("/")
+    
+    context = {
+        'user' : User.objects.get(id=userid)
+    }
+
+    return render(request, "wishlist.html", context)
+
+# remove product from wishlist route
+def remove_from_wishlist(request, userid, productid):
+    if 'userid' not in request.session:
+        return redirect("/")
+    
+    # get the user's wishlist
+    user_wishlist = Wishlist.objects.get(user_id=userid)
+    # remove product selected from user's wishlist
+    user_wishlist.products.remove(Product.objects.get(id=productid))
+
+    return redirect(f"/user/{userid}/wishlist/")
+
+# add product to wishlist route
+def add_to_wishlist(request, userid, productid):
+    if 'userid' not in request.session:
+        return redirect("/")
+    
+    # get the user's wishlist
+    user_wishlist = Wishlist.objects.get(user_id=userid)
+    # add product selected to user's wishlist
+    user_wishlist.products.add(Product.objects.get(id=productid))
+
+    return redirect(f"/user/{userid}/wishlist/")

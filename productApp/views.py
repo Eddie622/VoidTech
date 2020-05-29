@@ -1,3 +1,6 @@
+#TODO: On index route, display alert message when product is added to wishlist/cart
+#TODO: Alert user to sign in if add_to_wishlist button is clicked without being logged in
+
 from django.shortcuts import render, redirect, HttpResponse
 import re
 
