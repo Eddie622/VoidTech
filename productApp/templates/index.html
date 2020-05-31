@@ -61,7 +61,7 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-loggedin" aria-labelledby="dropdownMenuReference">
-                            <a class="dropdown-item" href="../../user/{{user.id}}">Profile</a>
+                            <a class="dropdown-item" href="../../user/profile">Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../../user/logout">Logout</a>
                         </div>
@@ -124,7 +124,7 @@
                 </div>
                 {% endif %}
                 {% if 'userid' in request.session %}
-                <a href="../../user/{{user.id}}/wishlist"><button type="button"
+                <a href="../../user/wishlist"><button type="button"
                         class="view-wishlist-btn iconBtn btn light-green-outline text-light"><i
                             data-feather="heart"></i></button></a>
                 {% else %}
