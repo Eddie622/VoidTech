@@ -1,7 +1,6 @@
 # TODO: On registration page,
 # show error messages when back-end validation fails (use bootstrap validation), 
 # also alert user on succesful account creation
-# TODO: DONT USE userid IN ROUTE!!!!!!!!!!!
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -53,6 +52,14 @@ def login(request):
         if bcrypt.checkpw(request.POST['pwd'].encode(), logged_user.password.encode()):
             # place user in session
             request.session['userid'] = logged_user.id
+            # get user's cart
+            user_cart = User.objects.get(id=request.session['userid']).cart
+            # if user's cart is NOT empty, place products in session
+            # if user_cart.products.all():
+            #     request.session['cart'] = []
+            #     for product in user_cart.products.all():
+            #         request.session['cart'].append(product.id)
+            #     request.session.save()
             # if remember me activated, save email, else delete session data for email
             if 'remember' in request.POST:
                 request.session['email'] = logged_user.email
@@ -76,6 +83,15 @@ def sampleLogin(request):
         if bcrypt.checkpw('samplePass'.encode(), logged_user.password.encode()):
             # place user in session
             request.session['userid'] = logged_user.id
+            # get user's cart
+            user_cart = User.objects.get(id=request.session['userid']).cart
+            # if user's cart is NOT empty, place products in session
+            # if user_cart.products.all():
+            #     request.session['cart'] = []
+            #     for product in user_cart.products.all():
+            #         print(product)
+            #         request.session['cart'].append(product.id)
+            #     request.session.save()
             # delete session data for email
             if 'email' in request.session:
                 del request.session['email']
@@ -87,9 +103,21 @@ def sampleLogin(request):
 
 # logout route
 def logout(request):
-    # if user is logged in, clear user specific session variables
-    if 'userid' in request.session:
-        del request.session['userid']
+    if 'userid' not in request.session:
+        return redirect('/')
+
+    # get user's cart
+    user_cart = User.objects.get(id=request.session['userid']).cart
+    # ensure no product duplication
+    user_cart.products.clear()
+    # get all products and save to cart FIXME: DOESNT ADD DUPLICATES
+    for productid in request.session['cart']:
+        user_cart.products.add(Product.objects.get(id=productid))
+
+    # clear session cart and remove user from session
+    request.session['cart'] = []
+    del request.session['userid']
+
     return redirect('/')
 
 # user profile route
@@ -124,7 +152,7 @@ def remove_from_wishlist(request, productid):
     # remove product selected from user's wishlist
     user_wishlist.products.remove(Product.objects.get(id=productid))
 
-    return redirect(f"/user/wishlist/")
+    return redirect("/user/wishlist/")
 
 # add product to wishlist route
 def add_to_wishlist(request, productid):
@@ -136,14 +164,4 @@ def add_to_wishlist(request, productid):
     # add product selected to user's wishlist
     user_wishlist.products.add(Product.objects.get(id=productid))
 
-    return redirect(f"/user/wishlist/")
-
-# def add_to_cart(request, productid):
-#     if not uverifyUser()
-    
-#     # get the user's cart
-#     user_cart = Cart.objects.get(user_id=request.session['userid'])
-#     # add product selected to user's cart
-#     user_cart.products.add(Product.objects.get(id=productid))
-
-#     return redirect(f"/user/cart/")
+    return redirect("/user/wishlist/")

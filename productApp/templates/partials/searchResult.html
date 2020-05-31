@@ -22,19 +22,16 @@
             <button type="button" class="iconBtn btn light-green-outline text-light light-black" data-toggle="modal"
                 data-target="#exampleModal" data-title="{{product.name}} ${{product.price}}"
                 data-desc="{{product.desc}}"><i data-feather="eye"></i><span>Details</span></button>
-            {% if 'userid' in request.session %}
             <!-- Create Route to add to cart -->
-            <button type="button" class="iconBtn btn light-green-outline text-light light-black"><i
-                    data-feather="shopping-cart"></i><span>Add to Cart</span></button>
+            <a href="cart/addProduct/{{product.id}}/"><button type="button" class="iconBtn btn light-green-outline text-light light-black"><i
+                    data-feather="shopping-cart"></i><span>Add to Cart</span></button></a>
         </div>
+        {% if 'userid' in request.session %}
         <!-- Replace with AJAX -->
         <a href="user/wishlist/addProduct/{{product.id}}"><button type="button"
                 class="displayWish iconBtn btn light-green-outline text-light light-black"><i
                     data-feather="heart"></i></button></a>
         {% else %}
-            <button type="button" class="iconBtn btn light-green-outline text-light light-black"><i
-                data-feather="shopping-cart"></i><span>Add to Cart</span></button>
-        </div>
         <button type="button" class="displayWish iconBtn btn light-green-outline text-light light-black"><i
             data-feather="heart"></i></button>
         <div class="add-to-wishlist-alert alert alert-warning alert-dismissible fade show" role="alert">

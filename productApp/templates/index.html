@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <!-- Nav -->
     <nav class="mid-black navbar navbar-expand-lg navbar-light fixed-top">
         <div class="brand">
             <img src="{% static 'img/void.jpg' %}" alt="Void Logo">
@@ -27,6 +28,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
@@ -48,6 +50,7 @@
                     <a class="category nav-link text-light" href="#Search">Accessories</a>
                 </li>
             </ul>
+            <!-- Right-side Links -->
             <div class="rightMenu">
                 {% if 'userid' in request.session %}
                 <div class="d-flex">
@@ -68,6 +71,7 @@
                     </div>
                 </div>
                 {% else %}
+                <!-- Sing-In Dropdown -->
                 <div class="d-flex">
                     <div class="btn-group">
                         <button type="button" class="userbtn btn light-green-outline text-light"><span>Sign-in</span><i
@@ -78,6 +82,7 @@
                             data-reference="parent">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
+                        <!-- Sign-In Form -->
                         <div class="dropdown-menu dropdown-signin" aria-labelledby="dropdownMenuReference">
                             <form class="px-4 py-3" action="../../user/login/" method="post">
                                 {% csrf_token %}
@@ -110,6 +115,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Sign in</button>
                             </form>
+                            <!-- End Sign-In Form -->
                             <div class="dropdown-divider"></div>
                             <form class="px-4 py-3" action="../../user/sampleLogin/" method="post">
                                 {% csrf_token %}
@@ -123,6 +129,7 @@
                     </div>
                 </div>
                 {% endif %}
+                <!-- End Sign-In Dropdown -->
                 {% if 'userid' in request.session %}
                 <a href="../../user/wishlist"><button type="button"
                         class="view-wishlist-btn iconBtn btn light-green-outline text-light"><i
@@ -137,13 +144,14 @@
                     </button>
                 </div>
                 {% endif %}
-                <a href="checkout/"><button type="button" class="iconBtn btn light-green-outline text-light"><i
-                            data-feather="shopping-cart"></i><span>0</span></button></a>
+                <a href="cart/"><button type="button" class="iconBtn btn light-green-outline text-light"><i
+                            data-feather="shopping-cart"></i><span>{{ cart_total }}</span></button></a>
             </div>
         </div>
     </nav>
     <!--End Nav-->
 
+    <!-- Carousel -->
     <header>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -177,12 +185,14 @@
     </header>
     <!--End Carousel-->
 
+    <!-- Search Form -->
     <form class="searchForm form-inline justify-content-center p-4 mid-black">
         {% csrf_token %}
         <button class="btn mr-2 light-green-outline text-light no-click"><i data-feather="search"></i></button>
         <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" id="Search" name="Search"
             aria-label="Search">
     </form>
+    <!-- End Search Form -->
 
     <!-- <div class="dropdown">
         Sort By :
@@ -205,6 +215,8 @@
             <!-- Load Search Results Here -->
         </div>
     </div>
+    <!-- End Content Container -->
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -225,6 +237,7 @@
     </div>
     <!--End Content-->
 
+    <!-- Pagination -->
     <nav aria-label="pagination">
         <ul class="pagination justify-content-center dark-black">
             <li class="page-item">
@@ -264,24 +277,12 @@
                     <h5 class="text-uppercase">Customer Service</h5>
 
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Help Center</a>
-                        </li>
-                        <li>
-                            <a href="#!">Track an Order</a>
-                        </li>
-                        <li>
-                            <a href="#!">Return an Item</a>
-                        </li>
-                        <li>
-                            <a href="#!">Return Policy</a>
-                        </li>
-                        <li>
-                            <a href="#!">Privacy & Security</a>
-                        </li>
-                        <li>
-                            <a href="#!">Feedback</a>
-                        </li>
+                        <li><a href="#!">Help Center</a></li>
+                        <li><a href="#!">Track an Order</a></li>
+                        <li><a href="#!">Return an Item</a></li>
+                        <li><a href="#!">Return Policy</a></li>
+                        <li><a href="#!">Privacy & Security</a></li>
+                        <li><a href="#!">Feedback</a></li>
                     </ul>
 
                 </div>
@@ -296,18 +297,10 @@
                     <h5 class="text-uppercase">Company</h5>
 
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">About Us</a>
-                        </li>
-                        <li>
-                            <a href="#!">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="#!">Careers</a>
-                        </li>
-                        <li>
-                            <a href="#!">Hours & Locations</a>
-                        </li>
+                        <li><a href="#!">About Us</a></li>
+                        <li><a href="#!">Contact Us</a></li>
+                        <li><a href="#!">Careers</a></li>
+                        <li><a href="#!">Hours & Locations</a></li>
                     </ul>
 
                 </div>
@@ -322,18 +315,10 @@
                     <h5 class="text-uppercase">My Account</h5>
 
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Login/Register</a>
-                        </li>
-                        <li>
-                            <a href="#!">My Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#!">Order History</a>
-                        </li>
-                        <li>
-                            <a href="#!">Wish Lists</a>
-                        </li>
+                        <li><a href="#!">Login/Register</a></li>
+                        <li><a href="#!">My Dashboard</a></li>
+                        <li><a href="#!">Order History</a></li>
+                        <li><a href="#!">Wish Lists</a></li>
                     </ul>
 
                 </div>
@@ -348,18 +333,10 @@
                     <h5 class="text-uppercase">Partnerships</h5>
 
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Sell on VoidTech</a>
-                        </li>
-                        <li>
-                            <a href="#!">Become an Affiliate</a>
-                        </li>
-                        <li>
-                            <a href="#!">Advertise with Us</a>
-                        </li>
-                        <li>
-                            <a href="#!">Advertise Your Products</a>
-                        </li>
+                        <li><a href="#!">Sell on VoidTech</a></li>
+                        <li><a href="#!">Become an Affiliate</a></li>
+                        <li><a href="#!">Advertise with Us</a></li>
+                        <li><a href="#!">Advertise Your Products</a></li>
                     </ul>
 
                 </div>

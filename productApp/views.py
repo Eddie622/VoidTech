@@ -1,13 +1,18 @@
 #TODO: On index route, display alert message when product is added to wishlist/cart with ajax
 
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 import re
 
 from .models import *
 
+# homepage
 def index(request):
+    if 'cart' not in request.session:
+        request.session['cart'] = []
+
     context = {
-        'products' : Product.objects.all()
+        'products' : Product.objects.all(),
+        'cart_total' : len(request.session['cart'])
     }
 
     # place user (if any)
@@ -20,6 +25,7 @@ def index(request):
 
     return render(request, 'index.html', context)
 
+# search products
 def search(request):
     # default context
     context = {
@@ -42,5 +48,39 @@ def search(request):
     # serve up search results
     return render(request, 'partials/searchResult.html', context)
 
-def checkout(request):
-    return HttpResponse("This is the checkout page. This page is currently under construction")
+# add product to cart route
+def add_to_cart(request, productid):
+    # generate cart if not exists
+    if 'cart' not in request.session:
+        request.session['cart'] = []
+    
+    # append product & save
+    request.session['cart'].append(productid)
+    request.session.save()
+
+    return redirect("/")
+
+# remove product from cart route
+def remove_from_cart(request, productid):
+    if 'cart' not in request.session:
+        return redirect("/")
+    
+    # remove product and save
+    request.session['cart'].remove(int(productid))
+    request.session.save()
+
+    return redirect("/cart/")
+
+# checkout route
+def view_cart(request):
+    # Grab all product objects in cart
+    cart_products = []
+    for productid in request.session['cart']:
+        cart_products.append(Product.objects.get(id=productid))
+
+    context = {
+        'cart_products' : cart_products,
+        'cart_total' : len(cart_products)
+    }
+
+    return render(request, 'checkout.html', context)
