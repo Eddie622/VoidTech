@@ -50,6 +50,13 @@
     .view-wishlist-alert {
         right: 100px;
     }
+    #navbarLinks {
+        flex-direction: row!important;
+        margin-top: 0!important;
+    }
+    .rightMenu {
+        justify-content: flex-end;
+    }
 }
 
 /* Normal Display */
@@ -69,6 +76,12 @@ html {
 .navbar img {
     border-radius: 20px;
     margin-right: 5px;
+}
+
+#navbarLinks {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 15px;
 }
 
 .rightMenu {

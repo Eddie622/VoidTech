@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoidTech Home</title>
+    <title>VoidTechSystems</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://unpkg.com/feather-icons"></script>
@@ -21,15 +21,15 @@
     <nav class="mid-black navbar navbar-expand-lg navbar-light fixed-top">
         <div class="brand">
             <img src="{% static 'img/void.jpg' %}" alt="Void Logo">
-            <a class="navbar-brand align-bottom text-light" href="#">VoidTech</a>
+            <a class="navbar-brand align-bottom text-light" href="#">VoidTechSystems</a>
         </div>
-        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarLinks"
+            aria-controls="navbarLinks" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse" id="navbarLinks">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link text-light" href=".">Home<span class="sr-only">(current)</span></a>
@@ -51,7 +51,7 @@
                 </li>
             </ul>
             <!-- Right-side Links -->
-            <div class="rightMenu">
+            <div class="rightMenu w-100">
                 {% if 'userid' in request.session %}
                 <div class="d-flex">
                     <div class="btn-group">
@@ -84,10 +84,10 @@
                         </button>
                         <!-- Sign-In Form -->
                         <div class="dropdown-menu dropdown-signin" aria-labelledby="dropdownMenuReference">
-                            <form class="px-4 py-3" action="../../user/login/" method="post">
+                            <form class="px-4 pt-1" action="../../user/login/" method="post">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormEmail1">Email address</label>
+                                <div class="form-group mb-1">
+                                    <label for="exampleDropdownFormEmail1" class="mb-1">Email address</label>
                                     {% if 'email' in request.session %}
                                     <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1"
                                         value="{{request.session.email}}">
@@ -96,12 +96,12 @@
                                         placeholder="email@example.com">
                                     {% endif %}
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormPassword1">Password</label>
+                                <div class="form-group mb-1">
+                                    <label for="exampleDropdownFormPassword1" class="mb-1">Password</label>
                                     <input name="pwd" type="password" class="form-control"
                                         id="exampleDropdownFormPassword1" placeholder="Password">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-1">
                                     <div class="form-check">
                                         {% if 'email' in request.session %}
                                         <input name="remember" type="checkbox" class="form-check-input"
@@ -117,14 +117,14 @@
                             </form>
                             <!-- End Sign-In Form -->
                             <div class="dropdown-divider"></div>
-                            <form class="px-4 py-3" action="../../user/sampleLogin/" method="post">
+                            <form class="px-4" action="../../user/sampleLogin/" method="post">
                                 {% csrf_token %}
                                 <a href="../../user/sampleLogin/"><button type="submit"
                                         class="btn btn-success w-100">Use Sample Login</button></a>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-center" href="../../user/register">New around here? Sign up</a>
-                            <a class="dropdown-item text-center" href="#">Forgot password?</a>
+                            <a class="dropdown-item text-center p-0" href="../../user/register">New around here? Sign up</a>
+                            <a class="dropdown-item text-center p-0" href="#">Forgot password?</a>
                         </div>
                     </div>
                 </div>
@@ -352,7 +352,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="#!"> VoidTech.com</a>
+            <a href="#!"> VoidTechSystems.com</a>
         </div>
         <!-- Copyright -->
 
