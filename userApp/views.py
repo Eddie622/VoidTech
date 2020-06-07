@@ -2,6 +2,9 @@
 # show error messages when back-end validation fails (use bootstrap validation), 
 # also alert user on succesful account creation
 
+# TODO: Create new database model to allows duplicate items in user's cart
+# then, uncomment/refactor commented-out code in login/logout
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -53,7 +56,7 @@ def login(request):
             # place user in session
             request.session['userid'] = logged_user.id
             # get user's cart
-            user_cart = User.objects.get(id=request.session['userid']).cart
+            # user_cart = User.objects.get(id=request.session['userid']).cart
             # if user's cart is NOT empty, place products in session
             # if user_cart.products.all():
             #     request.session['cart'] = []
@@ -84,7 +87,7 @@ def sampleLogin(request):
             # place user in session
             request.session['userid'] = logged_user.id
             # get user's cart
-            user_cart = User.objects.get(id=request.session['userid']).cart
+            # user_cart = User.objects.get(id=request.session['userid']).cart
             # if user's cart is NOT empty, place products in session
             # if user_cart.products.all():
             #     request.session['cart'] = []
@@ -111,11 +114,11 @@ def logout(request):
     # ensure no product duplication
     user_cart.products.clear()
     # get all products and save to cart FIXME: DOESNT ADD DUPLICATES
-    for productid in request.session['cart']:
-        user_cart.products.add(Product.objects.get(id=productid))
+    # for productid in request.session['cart']:
+    #     user_cart.products.add(Product.objects.get(id=productid))
 
     # clear session cart and remove user from session
-    request.session['cart'] = []
+    # request.session['cart'] = []
     del request.session['userid']
 
     return redirect('/')

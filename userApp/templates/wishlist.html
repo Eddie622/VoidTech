@@ -10,40 +10,52 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/modal.js' %}"></script>
 </head>
 
-<body>
-    <h1>{{user.first_name}} Wishlist</h1>
+<body class="dark-black">
+    <!-- Title -->
+    <h1 class="mid-black m-0 p-3 text-light">{{user.first_name}} Wishlist</h1>
 
-    <table class="table table-striped table-dark table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Product #</th>
-                <th scope="col">Product</th>
-                <th scope="col">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in user.wishlist.products.all %}
-            <tr>
-                <th scope="row">{{product.id}}</th>
-                <td>{{product.name}}</td>
-                <td><button type="button" class="iconBtn btn light-green-outline text-light light-black"
-                        data-toggle="modal" data-target="#exampleModal" data-title="{{product.name}} ${{product.price}}"
-                        data-desc="{{product.desc}}"><i data-feather="eye"></i><span>Details</span></button>
-                    <!-- Create anchor to go to route -->
-                    <button type="button" class="iconBtn btn light-green-outline text-light"><i
+    <!-- Content -->
+    <div class="container-fluid dark-black p-3 pb-5 mb-5">
+        <table class="table table-striped table-bordered m-0 table-outline text-light">
+            <thead class="mid-black">
+                <tr>
+                    <th scope="col">Product #</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in user.wishlist.products.all %}
+                <tr>
+                    <th scope="row">{{product.id}}</th>
+                    <td>{{product.name}}</td>
+                    <td><button type="button" class="iconBtn btn light-green-outline text-light light-black"
+                            data-toggle="modal" data-target="#exampleModal"
+                            data-title="{{product.name}} ${{product.price}}" data-desc="{{product.desc}}"><i class="mr-1"
+                                data-feather="eye"></i><span>Details</span></button>
+                        <!-- Create anchor to go to route -->
+                        <button type="button" class="iconBtn btn light-green-outline text-light light-black"><i class="mr-1"
                                 data-feather="shopping-cart"></i>Move to Cart</button>
-                    <!-- Replace witth AJAX -->
-                    <a href="removeProduct/{{product.id}}"><button type="button"
-                            class="displayWish iconBtn btn light-green-outline text-light light-black"><i
-                                data-feather="trash-2"></i>Remove</button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        <!-- Replace witth AJAX -->
+                        <a href="removeProduct/{{product.id}}"><button type="button"
+                                class="iconBtn btn light-green-outline text-light light-black"><i class="mr-1"
+                                    data-feather="trash-2"></i>Remove</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- End Content -->
+
+    <!-- Options -->
+    <div class="container-fluid mid-black p-3 fixed-bottom">
+        <a href="/"><button type="button" class="btn btn-primary">Return Home</button></a>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -63,8 +75,6 @@
             </div>
         </div>
     </div>
-
-    <a href="/"><button type="button" class="btn btn-primary">Return Home</button></a>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

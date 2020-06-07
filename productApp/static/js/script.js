@@ -8,7 +8,7 @@ $(document).ready(function () {
     // Get initial product content
     $.get("search/", function (serverResponse) {
         $("#productResults").html(serverResponse);
-        reload()
+        reload();
     });
 
     // Stop dropdown from closing on click within container

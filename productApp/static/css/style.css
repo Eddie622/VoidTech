@@ -1,4 +1,4 @@
-/* Color Classes */
+/* Essential Style Classes */
 
 .dark-black {
     background-color: #0d0d0d;
@@ -56,6 +56,10 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+.table-outline {
+    border: 10px solid #2BA225 !important;
 }
 
 .no-click {

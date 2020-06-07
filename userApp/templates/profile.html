@@ -7,50 +7,59 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
-    <h1>{{ user.first_name }} Profile Page</h1>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputfname">First Name</label>
-                <input type="text" class="form-control" id="inputfname" placeholder="{{user.first_name}}">
+<body class="dark-black">
+    <!-- Title -->
+    <h1 class="mid-black m-0 p-3 text-light">{{ user.first_name }} Profile Page</h1>
+    <div class="container-fluid mt-3">
+        <form class="light-green-outline text-light p-3 table-outline">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputfname">First Name</label>
+                    <input type="text" class="form-control" id="inputfname" placeholder="{{user.first_name}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputlname">Last Name</label>
+                    <input type="text" class="form-control" id="inputlname" placeholder="{{user.last_name}}">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputlname">Last Name</label>
-                <input type="text" class="form-control" id="inputlname" placeholder="{{user.last_name}}">
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
+            <div class="form-group">
+                <label for="inputAddress2">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                </div>
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+
+    <!-- Options -->
+    <div class="container-fluid mid-black p-3 fixed-bottom">
         <a href="/"><button type="button" class="btn btn-primary">Return Home</button></a>
-    </form>
-    
+    </div>
+
 </body>
 
 </html>
