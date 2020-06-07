@@ -42,8 +42,8 @@ def search(request):
     # search (no category)
     elif 'Search' in request.POST:
         context['products'] = Product.objects.filter(name__icontains = request.POST['Search'])
-    # else a GET request was made (or a vield name was altered):
-        # use default context
+    # else a GET request was made (or a field name was altered):
+        # will use default context
     
     # serve up search results
     return render(request, 'partials/searchResult.html', context)
