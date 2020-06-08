@@ -79,7 +79,6 @@ html {
 }
 
 #navbarLinks {
-    display: flex;
     flex-direction: column-reverse;
     margin-top: 15px;
 }
@@ -90,6 +89,10 @@ html {
 
 .d-flex, .navbar .collapse .iconBtn {
     margin-right: 10px;
+}
+
+.navbar-collapse{
+    display: flex;
 }
 
 .navbar .collapse .iconBtn span {
